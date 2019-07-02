@@ -1,0 +1,12 @@
+
+kind: Config
+build:
+  artifacts:
+  - image: akishitara1225/cronjob-monitor
+  local:
+    useBuildkit: true
+deploy:
+  kubectl:
+    manifests:
+      - deploy/test_k8scmd.yaml
+      - deploy/test_webui.yaml

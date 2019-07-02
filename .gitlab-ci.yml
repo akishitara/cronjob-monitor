@@ -1,0 +1,17 @@
+image: docker:latest
+services:
+   - docker:dind
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+
+tag-build:
+   stage: build
+   only:
+     - tags
+     - triggers
+   script:
+     - docker build -t registry.github.com/akishitara/cronjob-monitor:$CI_BUILD_TAG .
+     - docker push registry.github.com/akishitara/cronjob-monitor:$CI_BUILD_TAG
+   tags:
+     - docker

@@ -1,0 +1,29 @@
+google.charts.load("current", {packages:["timeline"]});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+
+  var container = document.getElementById('jobChart');
+  var chart = new google.visualization.Timeline(container);
+  var dataTable = new google.visualization.DataTable();
+  dataTable.addColumn({ type: 'string', id: 'CronJob' });
+  dataTable.addColumn({ type: 'string', id: 'Job' });
+  dataTable.addColumn({ type: 'date', id: 'Start' });
+  dataTable.addColumn({ type: 'date', id: 'End' });
+  dataTable.addRows([
+    {{range .data}}
+      {{$cronjobName := .Name}}
+      {{range .Jobs}}
+      [ '{{$cronjobName}}', '{{.Name}}', new Date('{{.StartTime}}'), new Date('{{.EndTime}}') ],
+      {{end}}
+    {{end}}
+  ]);
+
+  var options = {
+    timeline: { 
+      colorByRowLabel: true,
+      enableInteractivity: true
+    }
+  };
+
+  chart.draw(dataTable, options);
+}

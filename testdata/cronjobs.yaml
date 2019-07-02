@@ -1,0 +1,99 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-test
+spec:
+  successfulJobsHistoryLimit: 10
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: testjob
+              image: ubuntu
+              command: ["sh", "-c"]
+              args:
+                - |
+                  echo test1 ; date ; sleep 32
+  schedule: "*/10 * * * *"
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-test2
+spec:
+  successfulJobsHistoryLimit: 8
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: testjob
+              image: ubuntu
+              command: ["sh", "-c"]
+              args:
+                - |
+                   echo test2 ; date; sleep 60
+  schedule: "*/5 * * * *"
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-test3
+spec:
+  successfulJobsHistoryLimit: 6
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: testjob
+              image: ubuntu
+              command: ["sh", "-c"]
+              args:
+                - |
+                  echo test3 ; date ; sleep 300
+  schedule: "*/15 * * * *"
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-test4
+spec:
+  successfulJobsHistoryLimit: 8
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: testjob
+              image: ubuntu
+              command: ["sh", "-c"]
+              args:
+                - |
+                  echo test4 ; date ; sleep 600
+  schedule: "*/11 * * * *"
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-test5
+spec:
+  successfulJobsHistoryLimit: 4
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: testjob
+              image: ubuntu
+              command: ["sh", "-c"]
+              args:
+                - |
+                  echo test5 ; date ; sleep 450
+  schedule: "* */1 * * *"

@@ -1,0 +1,11 @@
+# テスト実行用
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8scmdtest
+spec:
+  terminationGracePeriodSeconds: 0
+  containers:
+    - name: k8scmdtest
+      image: akishitara1225/cronjob-monitor
+      command: ["k8scmd"]

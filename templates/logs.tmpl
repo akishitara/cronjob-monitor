@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>{{.title}}</title>
+
+  <!-- Bootstrap -->
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- select2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js">
+  </script>
+  <script>
+    $(function () {
+      $('.select2').select2({});
+    });
+  </script>
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">Top</a>
+    <a href="/api/cronjobs/json" class="navbar-brand">Json</a>
+    <a href="/api/cronjobs/yaml" class="navbar-brand">Yaml</a>
+    <a href="/logs/{{.podName}}" class="navbar-brand">Logs</a>
+    <a href="/api/logs/{{.podName}}/json" class="navbar-brand">Logs(Json)</a>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <main role="main" class="col">
+
+        <h2>Pods選択</h2>
+        <div id="select">
+          <select name="_pod" class="select2">
+            <option value="">--- Pod名を選択 ---</option>
+            {{range .cronJobs}}
+            <optgroup label="{{.Name}}">
+              {{ range .Jobs }}
+              {{ range $i, $v := .PodsNames }}
+              <option value="./{{$v}}">{{$v}}</option>
+              {{end}}
+              {{end}}
+            </optgroup>
+            {{end}}
+          </select>
+          <!-- jump -->
+          <script>
+            const selected = $("select[name=_pod]");
+            selected.on('change', function () {
+              window.location.href = selected.val();
+            });
+          </script>
+        </div>
+
+        <h2>Log</h2>
+        <div class="card">
+          <div class="card-header">
+            <h5>{{.podName}}</h5>
+          </div>
+          <div class="card-body">
+            {{range $i, $v := .log}}
+            <p class="card-text">{{$v}}</p>
+            {{end}}
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+
+</html>
