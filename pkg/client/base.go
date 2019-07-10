@@ -12,6 +12,10 @@ import (
 	"k8s.io/client-go/util/homedir"
 )
 
+func KubeClient() *kubernetes.Clientset {
+	return kubeClient()
+}
+
 // KUBE_CONFIGがあったらそのまま
 // なかったら~/.kube/configを返す
 func kubeConfigPath() string {
