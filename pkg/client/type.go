@@ -7,7 +7,7 @@ import (
 // ActiveCronjob Cronjobの設定情報とjob情報を返す
 type ActiveCronjob struct {
 	// Cronjob Name
-	Name string
+	Name string `json:"name"`
 	// Cronjob UID
 	UID string
 	// Cronjob Schedule
@@ -20,7 +20,7 @@ type ActiveCronjob struct {
 }
 
 type activejob struct {
-	Name      string
+	Name      string `json:"name"`
 	StartTime string //*metav1.Time
 	EndTime   string //*metav1.Time
 	Status    []batchv1.JobCondition

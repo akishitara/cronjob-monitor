@@ -53,3 +53,15 @@ func jobsToActivejobs(jobs []batchv1.Job) (res []activejob) {
 	}
 	return res
 }
+
+func (cronJobs ActiveCronjob) lastJobs() activejob{
+	var res activejob
+	jobs := cronJobs.Jobs
+	res.StartTime = "1988-08-01T00:00:00Z"
+  for i, _ := range jobs{
+		if jobs[i].StartTime > res.StartTime {
+			res = jobs[i]
+		}
+	}
+	return res
+}
