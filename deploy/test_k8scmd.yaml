@@ -7,5 +7,5 @@ spec:
   terminationGracePeriodSeconds: 0
   containers:
     - name: k8scmdtest
-      image: akishitara1225/cronjob-monitor
+      image: akishitara/cronjob-monitor
       command: ["k8scmd"]

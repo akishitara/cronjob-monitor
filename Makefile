@@ -6,7 +6,7 @@ GOOS := linux
 GOARCH := amd64
 CGO_ENABLED	:= 0
 DOCKER_BUILDKIT	:= 1 
-DOCKER_IMG	:= akishitara1225/cronjob-monitor
+DOCKER_IMG	:= akishitara/cronjob-monitor
 
 default: help
 

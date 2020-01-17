@@ -2,7 +2,7 @@
 kind: Config
 build:
   artifacts:
-  - image: akishitara1225/cronjob-monitor
+  - image: akishitara/cronjob-monitor
   local:
     useBuildkit: true
 deploy:

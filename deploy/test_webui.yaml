@@ -7,5 +7,5 @@ spec:
   terminationGracePeriodSeconds: 0
   containers:
     - name: webuitest
-      image: akishitara1225/cronjob-monitor
+      image: akishitara/cronjob-monitor
       command: ["webui"]
