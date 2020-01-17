@@ -16,3 +16,4 @@ FROM alpine:3.10.0
 COPY --from=builder /go/bin /usr/local/bin
 # add static
 COPY templates ./templates
+
